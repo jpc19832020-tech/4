@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <div style="text-align: center; padding: 50px 20px;">
+            <h1>404</h1>
+            <h2>Página no encontrada</h2>
+            <p>La página que buscas no existe.</p>
+            <a href="./" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px;">
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // SPA redirect
+        if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+            window.location.href = './';
+        }
+    </script>
+</body>
+</html>
