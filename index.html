@@ -138,11 +138,13 @@
     .hero-caption small { display: block; margin-bottom: 6px; color: var(--coral); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
     .hero-caption strong { display: block; font-size: 1rem; line-height: 1.25; }
 
-    .ticker { position: relative; z-index: 2; overflow: hidden; padding: 15px 0; color: var(--ink); background: var(--coral); }
-    .ticker-track { display: flex; width: max-content; animation: tickerMove 24s linear infinite; }
-    .ticker-group { display: flex; gap: 34px; padding-right: 34px; font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
-    .ticker-group span::before { content: "✦"; margin-right: 34px; }
-    @keyframes tickerMove { to { transform: translateX(-50%); } }
+    .ticker { position: relative; z-index: 2; overflow: hidden; padding: 15px 0; color: var(--ink); background: repeating-linear-gradient(-45deg, var(--coral) 0 18px, #f96e56 18px 36px); background-size: 51px 51px; animation: tickerTexture 2.2s linear infinite; }
+    .ticker-track { display: flex; width: max-content; will-change: transform; animation: tickerMove 18s linear infinite; }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+    .ticker-group { display: flex; gap: 42px; padding-right: 42px; font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+    .ticker-group span::before { content: "✦"; margin-right: 42px; }
+    @keyframes tickerMove { to { transform: translate3d(-33.333%, 0, 0); } }
+    @keyframes tickerTexture { to { background-position: 51px 0; } }
 
     .intro { background: var(--paper); color: var(--ink); }
     .intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: end; }
@@ -361,6 +363,7 @@
     <div class="ticker" aria-label="Servicios Taygetos">
       <div class="ticker-track">
         <div class="ticker-group"><span>Fuerza</span><span>Coordinación</span><span>Resistencia</span><span>Confianza</span><span>Online</span></div>
+        <div class="ticker-group" aria-hidden="true"><span>Fuerza</span><span>Coordinación</span><span>Resistencia</span><span>Confianza</span><span>Online</span></div>
         <div class="ticker-group" aria-hidden="true"><span>Fuerza</span><span>Coordinación</span><span>Resistencia</span><span>Confianza</span><span>Online</span></div>
       </div>
     </div>
