@@ -68,20 +68,23 @@
       backdrop-filter: blur(18px);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { width: 126px; }
+    .brand { width: 116px; }
     .nav-links { display: flex; gap: 28px; color: #d3e6e8; font-size: .92rem; }
     .nav-links a { transition: color .2s ease; }
     .nav-links a:hover { color: var(--aqua); }
-    .nav-cta { padding: 11px 17px; border: 1px solid rgba(98,228,238,.48); border-radius: 999px; color: var(--aqua); font-weight: 700; font-size: .86rem; }
-    .menu-toggle { display: none; border: 1px solid var(--line); border-radius: 999px; padding: 9px 13px; color: var(--white); background: rgba(255,255,255,.04); font: inherit; font-size: .78rem; font-weight: 800; cursor: pointer; }
+    .nav-cta { padding: 10px 14px; border: 1px solid rgba(98,228,238,.48); border-radius: 4px; color: var(--aqua); font-weight: 800; font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; }
+    .menu-toggle { display: none; padding: 8px 0 8px 28px; border: 0; color: var(--white); background: transparent; font: inherit; font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; position: relative; }
+    .menu-toggle::before, .menu-toggle::after { content: ""; position: absolute; left: 0; width: 18px; height: 1px; background: var(--aqua); transition: transform .2s ease; }
+    .menu-toggle::before { top: 12px; }
+    .menu-toggle::after { top: 18px; }
 
     .hero {
       position: relative;
-      min-height: 880px;
+      min-height: 760px;
       display: flex;
       align-items: center;
       overflow: hidden;
-      padding: 126px 0 94px;
+      padding: 118px 0 74px;
       background:
         radial-gradient(circle at 79% 20%, rgba(242,101,78,.24), transparent 21%),
         radial-gradient(circle at 28% 100%, rgba(99,213,213,.16), transparent 33%),
@@ -106,38 +109,34 @@
       background: var(--paper);
       clip-path: polygon(0 76%, 100% 0, 100% 100%, 0 100%);
     }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 58px; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 64px; }
     .hero-copy { position: relative; z-index: 2; }
     .hero-eyebrow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; }
     .hero-status { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border: 1px solid rgba(99,213,213,.3); border-radius: 999px; color: #cfe6e8; font-size: .7rem; font-weight: 800; }
     .hero-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 5px rgba(242,101,78,.13); animation: statusPulse 2s ease-in-out infinite; }
     @keyframes statusPulse { 50% { box-shadow: 0 0 0 9px rgba(242,101,78,0); } }
-    .hero h1 { max-width: 690px; margin: 25px 0 25px; font-size: clamp(4.2rem, 6.8vw, 7.2rem); }
+    .hero h1 { max-width: 690px; margin: 25px 0 25px; font-size: clamp(4rem, 6.2vw, 6.8rem); }
     .hero .lede { max-width: 590px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 15px 23px; font-weight: 800; transition: transform .2s ease, box-shadow .2s ease; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 4px; padding: 15px 23px; font-weight: 800; transition: transform .2s ease, box-shadow .2s ease; }
     .button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.24); }
     .button-primary { color: #10212a; background: var(--aqua); }
-    .button-secondary { border: 1px solid var(--line); color: var(--white); background: rgba(255,255,255,.04); }
+    .button-secondary { padding-right: 0; border-bottom: 1px solid var(--aqua); border-radius: 0; color: var(--white); background: transparent; }
     .hero-programs { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 430px; margin-top: 34px; border-top: 1px solid rgba(255,255,255,.18); }
     .hero-program { position: relative; padding: 17px 17px 12px 0; color: #d8e6e8; transition: color .25s ease, transform .25s ease; }
     .hero-program + .hero-program { padding-left: 17px; border-left: 1px solid rgba(255,255,255,.14); }
     .hero-program:hover { color: var(--aqua); transform: translateY(-3px); }
     .hero-program small { display: block; margin-bottom: 5px; color: var(--coral); font-size: .63rem; font-weight: 900; letter-spacing: .14em; }
     .hero-program strong { font-size: .88rem; }
-    .hero-media { position: relative; min-height: 610px; }
-    .hero-frame { position: absolute; overflow: hidden; border: 1px solid rgba(255,255,255,.24); box-shadow: var(--shadow); }
-    .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(4,15,20,.52)); pointer-events: none; }
+    .hero-media { position: relative; min-height: 560px; border-left: 1px solid rgba(98,228,238,.45); }
+    .hero-frame { position: absolute; overflow: hidden; box-shadow: var(--shadow); }
+    .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,15,20,.22), transparent 45%), linear-gradient(180deg, transparent 52%, rgba(4,15,20,.64)); pointer-events: none; }
     .hero-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-    .hero-frame-main { inset: 20px 0 34px 92px; border-radius: 180px 24px 24px 24px; }
-    .hero-frame-main img { object-position: center center; transform: scale(1.03); }
-    .hero-frame-secondary { z-index: 2; left: 0; bottom: 0; width: 210px; height: 268px; border-radius: 18px 82px 18px 18px; }
-    .hero-frame-secondary img { transform: scale(1.52); transform-origin: 38% top; }
-    .hero-badge { position: absolute; z-index: 3; top: 0; left: 36px; width: 108px; height: 108px; display: grid; place-content: center; border: 1px solid rgba(99,213,213,.45); border-radius: 50%; color: #d7e9eb; background: rgba(7,24,33,.88); font-size: .63rem; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
-    .hero-badge strong { display: block; margin-top: 2px; color: var(--aqua); font-size: .86rem; letter-spacing: 0; }
-    .hero-proof { position: absolute; z-index: 3; right: -18px; bottom: 16px; width: 235px; padding: 18px 20px; border: 1px solid rgba(255,255,255,.2); border-radius: 15px; color: #d3e3e5; background: rgba(7,24,33,.88); backdrop-filter: blur(14px); }
-    .hero-proof small { display: block; margin-bottom: 7px; color: var(--coral); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
-    .hero-proof strong { display: block; font-size: 1rem; line-height: 1.25; }
+    .hero-frame-main { inset: 0 0 0 28px; }
+    .hero-frame-main img { object-position: 58% center; transform: none; }
+    .hero-caption { position: absolute; z-index: 3; right: -1px; bottom: 34px; width: 265px; padding: 18px 20px; border-left: 3px solid var(--aqua); color: #eaf5f6; background: var(--ink); }
+    .hero-caption small { display: block; margin-bottom: 6px; color: var(--coral); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-caption strong { display: block; font-size: 1rem; line-height: 1.25; }
 
     .ticker { position: relative; z-index: 2; overflow: hidden; padding: 15px 0; color: var(--ink); background: var(--coral); }
     .ticker-track { display: flex; width: max-content; animation: tickerMove 24s linear infinite; }
@@ -291,12 +290,10 @@
       .hero h1 { font-size: clamp(3.25rem, 15vw, 4.6rem); }
       .hero-programs { grid-template-columns: 1fr; }
       .hero-program + .hero-program { padding-left: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); }
-      .hero-media { min-height: 430px; }
-      .hero-frame-main { inset: 24px 0 20px 40px; border-radius: 110px 18px 18px 18px; }
-      .hero-frame-main img { transform: scale(1.06); }
-      .hero-frame-secondary { width: 132px; height: 174px; }
-      .hero-badge { left: 5px; width: 88px; height: 88px; font-size: .52rem; }
-      .hero-proof { right: 0; bottom: 3px; width: 195px; padding: 14px 15px; }
+      .hero-media { min-height: 410px; border-left: 0; }
+      .hero-frame-main { inset: 0; }
+      .hero-frame-main img { object-position: 56% center; }
+      .hero-caption { right: 0; bottom: 0; width: min(82%, 290px); padding: 15px 17px; }
       .program-grid, .price-grid { grid-template-columns: 1fr; }
       .program-card, .program-card img { min-height: 350px; }
       .price-card.featured { transform: none; }
@@ -356,9 +353,7 @@
         </div>
         <div class="hero-media" aria-label="Entrenamiento funcional en Taygetos">
           <div class="hero-frame hero-frame-main"><img src="assets/hero-training.webp" alt="Adulto entrenando con kettlebell en un gimnasio funcional" /></div>
-          <div class="hero-frame hero-frame-secondary"><img src="assets/teens.webp" alt="Adolescentes entrenando en Taygetos" /></div>
-          <div class="hero-badge">Desde<strong>Arequipa</strong></div>
-          <div class="hero-proof"><small>Entrenamiento integral</small><strong>Fuerza, coordinación y confianza.</strong></div>
+          <div class="hero-caption"><small>Entrenamiento funcional</small><strong>Progreso que se nota dentro y fuera del gimnasio.</strong></div>
         </div>
       </div>
     </section>
