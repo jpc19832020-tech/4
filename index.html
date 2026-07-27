@@ -1,47 +1,587 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4</title>
-    <meta name="description" content="Sitio web creado con el Editor Web PRO">
-    <meta name="keywords" content="sitio web, 4">
-    <meta name="author" content="Editor Web PRO">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="4">
-    <meta property="og:description" content="Sitio web creado con el Editor Web PRO">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="./assets/icons/og-image.png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="./styles/tokens.css">
-    <link rel="stylesheet" href="./styles/main.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="./assets/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Taygetos: entrenamiento funcional para adolescentes y adultos en Arequipa." />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <title>Taygetos | Entrenamiento funcional</title>
+  <style>
+    :root {
+      --ink: #071821;
+      --navy: #0b2732;
+      --petrol: #0d5963;
+      --teal: #168b96;
+      --aqua: #63d5d5;
+      --coral: #f2654e;
+      --orange: #ff8a62;
+      --white: #f8fbf9;
+      --paper: #f4f0e8;
+      --muted: #9cb5ba;
+      --line: rgba(202, 247, 250, .18);
+      --ink-line: rgba(7, 24, 33, .14);
+      --shadow: 0 24px 70px rgba(0, 0, 0, .26);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--white);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--aqua); outline-offset: 4px; }
+    img { display: block; max-width: 100%; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow {
+      color: var(--aqua);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .section { padding: 112px 0; position: relative; scroll-margin-top: 96px; }
+    .section-heading { max-width: 690px; margin-bottom: 48px; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .program-card:nth-child(2) { transition-delay: .08s; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { letter-spacing: -.055em; line-height: .98; }
+    h1 { max-width: 760px; margin: 20px 0 26px; font-size: clamp(3.4rem, 8vw, 7.5rem); }
+    h2 { margin: 14px 0 18px; font-size: clamp(2.7rem, 5vw, 5.2rem); }
+    h3 { margin-bottom: 8px; font-size: 1.35rem; }
+    .lede { color: #c4d7da; font-size: clamp(1.05rem, 1.8vw, 1.28rem); max-width: 650px; }
+    .accent { color: var(--coral); }
+
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 5;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(7, 24, 33, .86);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { width: 126px; }
+    .nav-links { display: flex; gap: 28px; color: #d3e6e8; font-size: .92rem; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--aqua); }
+    .nav-cta { padding: 11px 17px; border: 1px solid rgba(98,228,238,.48); border-radius: 999px; color: var(--aqua); font-weight: 700; font-size: .86rem; }
+    .menu-toggle { display: none; border: 1px solid var(--line); border-radius: 999px; padding: 9px 13px; color: var(--white); background: rgba(255,255,255,.04); font: inherit; font-size: .78rem; font-weight: 800; cursor: pointer; }
+
+    .hero {
+      position: relative;
+      min-height: 880px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 126px 0 94px;
+      background:
+        radial-gradient(circle at 79% 20%, rgba(242,101,78,.24), transparent 21%),
+        radial-gradient(circle at 28% 100%, rgba(99,213,213,.16), transparent 33%),
+        linear-gradient(118deg, #071821 0%, #0a2d38 58%, #0e5660 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .12;
+      background-image:
+        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(90deg, transparent, #000 36%, #000);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 54px;
+      background: var(--paper);
+      clip-path: polygon(0 76%, 100% 0, 100% 100%, 0 100%);
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 58px; }
+    .hero-copy { position: relative; z-index: 2; }
+    .hero-eyebrow-row { display: flex; flex-wrap: wrap; align-items: center; gap: 15px; }
+    .hero-status { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border: 1px solid rgba(99,213,213,.3); border-radius: 999px; color: #cfe6e8; font-size: .7rem; font-weight: 800; }
+    .hero-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 5px rgba(242,101,78,.13); animation: statusPulse 2s ease-in-out infinite; }
+    @keyframes statusPulse { 50% { box-shadow: 0 0 0 9px rgba(242,101,78,0); } }
+    .hero h1 { max-width: 690px; margin: 25px 0 25px; font-size: clamp(4.2rem, 6.8vw, 7.2rem); }
+    .hero .lede { max-width: 590px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; padding: 15px 23px; font-weight: 800; transition: transform .2s ease, box-shadow .2s ease; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.24); }
+    .button-primary { color: #10212a; background: var(--aqua); }
+    .button-secondary { border: 1px solid var(--line); color: var(--white); background: rgba(255,255,255,.04); }
+    .hero-programs { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 430px; margin-top: 34px; border-top: 1px solid rgba(255,255,255,.18); }
+    .hero-program { position: relative; padding: 17px 17px 12px 0; color: #d8e6e8; transition: color .25s ease, transform .25s ease; }
+    .hero-program + .hero-program { padding-left: 17px; border-left: 1px solid rgba(255,255,255,.14); }
+    .hero-program:hover { color: var(--aqua); transform: translateY(-3px); }
+    .hero-program small { display: block; margin-bottom: 5px; color: var(--coral); font-size: .63rem; font-weight: 900; letter-spacing: .14em; }
+    .hero-program strong { font-size: .88rem; }
+    .hero-media { position: relative; min-height: 610px; }
+    .hero-frame { position: absolute; overflow: hidden; border: 1px solid rgba(255,255,255,.24); box-shadow: var(--shadow); }
+    .hero-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(4,15,20,.52)); pointer-events: none; }
+    .hero-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .hero-frame-main { inset: 20px 0 34px 92px; border-radius: 180px 24px 24px 24px; }
+    .hero-frame-main img { object-position: center center; transform: scale(1.03); }
+    .hero-frame-secondary { z-index: 2; left: 0; bottom: 0; width: 210px; height: 268px; border-radius: 18px 82px 18px 18px; }
+    .hero-frame-secondary img { transform: scale(1.52); transform-origin: 38% top; }
+    .hero-badge { position: absolute; z-index: 3; top: 0; left: 36px; width: 108px; height: 108px; display: grid; place-content: center; border: 1px solid rgba(99,213,213,.45); border-radius: 50%; color: #d7e9eb; background: rgba(7,24,33,.88); font-size: .63rem; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
+    .hero-badge strong { display: block; margin-top: 2px; color: var(--aqua); font-size: .86rem; letter-spacing: 0; }
+    .hero-proof { position: absolute; z-index: 3; right: -18px; bottom: 16px; width: 235px; padding: 18px 20px; border: 1px solid rgba(255,255,255,.2); border-radius: 15px; color: #d3e3e5; background: rgba(7,24,33,.88); backdrop-filter: blur(14px); }
+    .hero-proof small { display: block; margin-bottom: 7px; color: var(--coral); font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .hero-proof strong { display: block; font-size: 1rem; line-height: 1.25; }
+
+    .ticker { position: relative; z-index: 2; overflow: hidden; padding: 15px 0; color: var(--ink); background: var(--coral); }
+    .ticker-track { display: flex; width: max-content; animation: tickerMove 24s linear infinite; }
+    .ticker-group { display: flex; gap: 34px; padding-right: 34px; font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+    .ticker-group span::before { content: "✦"; margin-right: 34px; }
+    @keyframes tickerMove { to { transform: translateX(-50%); } }
+
+    .intro { background: var(--paper); color: var(--ink); }
+    .intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: end; }
+    .intro-copy p { color: #52666b; max-width: 640px; font-size: 1.12rem; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .metric { padding: 22px 0; border-top: 1px solid var(--ink-line); }
+    .metric strong { display: block; color: var(--petrol); font-size: 2.5rem; letter-spacing: -.06em; }
+    .metric span { color: #607276; font-size: .84rem; }
+
+    .programs { background: var(--paper); color: var(--ink); }
+    .intro .eyebrow, .method .eyebrow, .programs .eyebrow { color: var(--petrol); }
+    .programs .lede { color: #5a6e72; }
+    .program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .program-card { position: relative; min-height: 420px; overflow: hidden; border: 1px solid rgba(7,24,33,.16); border-radius: var(--radius); background: #112d37; }
+    .program-card img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; filter: saturate(.85); transition: transform .5s ease; }
+    .program-card:hover img { transform: scale(1.045); }
+    .program-card, .price-card, .online-media, .contact-box { transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    .program-card:hover { transform: translateY(-8px); border-color: rgba(98,228,238,.5); box-shadow: 0 20px 45px rgba(0,0,0,.24); }
+    .program-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 32%, rgba(4, 15, 20, .9) 100%); }
+    .program-content { position: absolute; z-index: 1; inset: auto 28px 26px; }
+    .program-content p { max-width: 420px; margin-bottom: 0; color: #c4d7da; }
+    .program-tag { display: inline-block; margin-bottom: 13px; padding: 7px 10px; color: var(--ink); background: var(--aqua); border-radius: 6px; font-size: .7rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .program-card:nth-child(2) .program-tag { color: #fff; background: var(--coral); }
+
+    .method { background: #e8e2d8; color: var(--ink); }
+    .method .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 40px; max-width: none; }
+    .method .section-heading > div:last-child { max-width: 360px; color: #5e6d70; font-size: .96rem; }
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink-line); }
+    .method-card { min-height: 205px; padding: 26px 28px 24px 0; border-right: 1px solid var(--ink-line); }
+    .method-card + .method-card { padding-left: 28px; }
+    .method-card:last-child { border-right: 0; }
+    .method-number { display: block; margin-bottom: 32px; color: var(--coral); font-size: .78rem; font-weight: 900; letter-spacing: .16em; }
+    .method-card h3 { margin-bottom: 8px; font-size: 1.45rem; letter-spacing: -.04em; }
+    .method-card p { max-width: 280px; margin-bottom: 0; color: #5e6d70; font-size: .94rem; }
+
+    .pricing { background: var(--ink); }
+    .pricing-header { display: flex; justify-content: space-between; align-items: end; gap: 40px; max-width: none; }
+    .pricing-header-copy { max-width: 430px; color: var(--muted); }
+    .plan-builder { display: grid; grid-template-columns: 280px 1fr; gap: 20px; padding: 20px; border: 1px solid var(--line); border-radius: 28px; background: rgba(255,255,255,.025); }
+    .stage-panel { padding: 12px; border-radius: 20px; background: #0b222c; }
+    .filter-label { display: block; margin: 3px 5px 15px; color: var(--muted); font-size: .66rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .stage-tabs { display: grid; gap: 8px; }
+    .stage-tab { position: relative; width: 100%; border: 1px solid transparent; border-radius: 14px; padding: 17px 16px; color: #c2d3d6; background: transparent; font: inherit; text-align: left; cursor: pointer; transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s ease; }
+    .stage-tab:hover { transform: translateX(3px); border-color: rgba(99,213,213,.25); }
+    .stage-tab.active { color: var(--white); border-color: rgba(99,213,213,.4); background: linear-gradient(135deg, rgba(22,139,150,.28), rgba(22,139,150,.08)); }
+    .stage-tab strong { display: block; font-size: 1rem; }
+    .stage-tab span { display: block; margin-top: 2px; color: var(--muted); font-size: .76rem; }
+    .stage-tab.active::after { content: ""; position: absolute; top: 50%; right: 14px; width: 8px; height: 8px; border-radius: 50%; background: var(--coral); transform: translateY(-50%); box-shadow: 0 0 0 5px rgba(242,101,78,.12); }
+    .plan-main { min-width: 0; padding: 10px 10px 8px; }
+    .plan-topline { display: flex; justify-content: space-between; align-items: start; gap: 30px; margin-bottom: 26px; }
+    .plan-context { max-width: 500px; }
+    .plan-context small { color: var(--aqua); font-size: .7rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .plan-context h3 { margin: 8px 0 7px; font-size: clamp(1.7rem, 3vw, 2.5rem); letter-spacing: -.05em; }
+    .plan-context p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .frequency-wrap { flex: 0 0 auto; }
+    .frequency-tabs { display: flex; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: #0c2630; }
+    .frequency-tabs button { border: 0; border-radius: 999px; padding: 10px 16px; color: var(--muted); background: transparent; font: inherit; font-size: .78rem; font-weight: 800; cursor: pointer; }
+    .frequency-tabs button.active { color: var(--ink); background: var(--aqua); }
+    .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .price-grid.is-switching { animation: planSwap .38s ease both; }
+    @keyframes planSwap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .price-card { position: relative; padding: 30px 26px 26px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(150deg, rgba(28, 96, 105, .44), rgba(4, 24, 32, .9)); }
+    .price-card.featured { border-color: var(--coral); transform: translateY(-12px); box-shadow: 0 22px 50px rgba(255, 101, 76, .12); }
+    .price-card:hover { transform: translateY(-6px); border-color: rgba(98,228,238,.5); box-shadow: 0 18px 40px rgba(0,0,0,.24); }
+    .price-card.featured:hover { transform: translateY(-17px); border-color: var(--coral); }
+    .ribbon { position: absolute; top: 17px; right: 17px; color: var(--coral); font-size: .64rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .price-card h3 { font-size: 1rem; color: var(--aqua); text-transform: uppercase; }
+    .price { margin: 18px 0 3px; font-size: 3.7rem; font-weight: 900; letter-spacing: -.09em; }
+    .price small { font-size: 1.25rem; letter-spacing: -.04em; }
+    .price-note { min-height: 43px; color: var(--muted); font-size: .85rem; }
+    .price-card .button { width: 100%; margin-top: 18px; }
+    .price-card--consult { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; padding: 34px; background: linear-gradient(135deg, rgba(242,101,78,.12), rgba(13,89,99,.2)); }
+    .price-card--consult h3 { margin-bottom: 8px; color: var(--white); font-size: 1.55rem; text-transform: none; }
+    .price-card--consult .price-note { min-height: 0; max-width: 560px; }
+    .price-card--consult .button { width: auto; min-width: 190px; margin-top: 0; }
+    .plan-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .plan-benefit { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border-top: 1px solid var(--line); color: #c5d6d8; font-size: .8rem; }
+    .plan-benefit::before { content: "✓"; color: var(--aqua); font-weight: 900; }
+    .online-copy { color: var(--muted); }
+    .online-note { margin-top: 14px; color: #c4d7da; font-size: .82rem; }
+
+    .online { overflow: hidden; background: var(--petrol); }
+    .online-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 65px; align-items: center; }
+    .online-media { position: relative; min-height: 460px; overflow: hidden; border-radius: 24px; border: 1px solid rgba(255,255,255,.18); }
+    .online-media:hover { transform: translateY(-6px); border-color: rgba(98,228,238,.55); box-shadow: var(--shadow); }
+    .online-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(5, 29, 37, .1), rgba(5, 29, 37, .72)); }
+    .online-media img { width: 100%; height: 100%; min-height: 460px; object-fit: cover; }
+    .online-copy h2 { max-width: 560px; }
+    .online-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 30px 0; }
+    .online-list div { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); color: #d5e8ea; font-size: .92rem; }
+    .online-list b { color: var(--coral); font-size: 1.3rem; }
+
+    .contact { background: radial-gradient(circle at 90% 20%, rgba(255, 101, 76, .2), transparent 30%), linear-gradient(135deg, #08232d, #07141d); }
+    .contact-box { display: flex; justify-content: space-between; align-items: center; gap: 40px; padding: 58px; border: 1px solid rgba(98, 228, 238, .3); border-radius: 28px; background: rgba(13, 73, 87, .42); }
+    .contact-box h2 { max-width: 670px; margin-bottom: 0; }
+    .contact-box:hover { transform: translateY(-5px); border-color: rgba(98,228,238,.55); }
+    .whatsapp-float { position: fixed; z-index: 20; right: 24px; bottom: 24px; width: 62px; height: 62px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: #25d366; box-shadow: 0 14px 34px rgba(0,0,0,.28), 0 0 0 7px rgba(37,211,102,.12); transition: transform .25s ease, box-shadow .25s ease; }
+    .whatsapp-float:hover { transform: translateY(-5px) scale(1.04); box-shadow: 0 19px 42px rgba(0,0,0,.34), 0 0 0 10px rgba(37,211,102,.12); }
+    .whatsapp-float img { width: 31px; height: 31px; }
+    .whatsapp-float::before { content: "Escríbenos"; position: absolute; right: calc(100% + 11px); padding: 7px 10px; border-radius: 8px; color: var(--white); background: var(--ink); font-size: .72rem; font-weight: 800; opacity: 0; transform: translateX(6px); pointer-events: none; transition: opacity .2s ease, transform .2s ease; white-space: nowrap; }
+    .whatsapp-float:hover::before { opacity: 1; transform: none; }
+    footer { padding: 32px 0; border-top: 1px solid var(--line); color: #b8c9cc; background: var(--ink); font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-brand { width: 100px; }
+
+    @media (max-width: 850px) {
+      .nav-links { display: none; position: absolute; top: calc(100% + 10px); left: 14px; right: 14px; padding: 12px; border: 1px solid var(--line); border-radius: 18px; background: rgba(7, 20, 29, .96); box-shadow: var(--shadow); }
+      .nav-links.open { display: grid; gap: 0; }
+      .nav-links a { padding: 13px 12px; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .nav-links a:last-child { border-bottom: 0; }
+      .menu-toggle { display: inline-flex; }
+      .hero { min-height: auto; padding: 140px 0 105px; }
+      .hero-grid, .intro-grid, .online-grid { grid-template-columns: 1fr; gap: 46px; }
+      .hero h1 { font-size: clamp(3.8rem, 12vw, 6rem); }
+      .method .section-heading { display: block; }
+      .method .section-heading > div:last-child { margin-top: 20px; }
+      .method-grid { grid-template-columns: 1fr; }
+      .method-card, .method-card + .method-card { min-height: auto; padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--ink-line); }
+      .method-card:last-child { border-bottom: 0; }
+      .hero-media { min-height: 520px; }
+      .hero-frame-main { inset: 20px 8px 30px 80px; }
+      .hero-proof { right: 0; }
+      .pricing-header { display: block; }
+      .pricing-header-copy { margin-top: 18px; }
+      .plan-builder { grid-template-columns: 1fr; }
+      .stage-tabs { grid-template-columns: repeat(2, 1fr); }
+      .stage-tab { text-align: center; }
+      .stage-tab.active::after { display: none; }
+      .plan-topline { display: block; }
+      .frequency-wrap { margin-top: 20px; }
+      .frequency-tabs { width: max-content; }
+      .contact-box { display: block; padding: 36px 28px; }
+      .contact-box .button { margin-top: 26px; }
+    }
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .section { padding: 78px 0; }
+      h1 { font-size: clamp(3rem, 16vw, 5rem); }
+      h2 { font-size: 3rem; }
+      .nav { padding: 15px 0; }
+      .nav-cta { padding: 9px 13px; font-size: .74rem; }
+      .hero { padding-top: 126px; }
+      .hero-grid { display: flex; flex-direction: column; }
+      .hero-media { order: -1; width: 100%; }
+      .hero h1 { font-size: clamp(3.25rem, 15vw, 4.6rem); }
+      .hero-programs { grid-template-columns: 1fr; }
+      .hero-program + .hero-program { padding-left: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.12); }
+      .hero-media { min-height: 430px; }
+      .hero-frame-main { inset: 24px 0 20px 40px; border-radius: 110px 18px 18px 18px; }
+      .hero-frame-main img { transform: scale(1.06); }
+      .hero-frame-secondary { width: 132px; height: 174px; }
+      .hero-badge { left: 5px; width: 88px; height: 88px; font-size: .52rem; }
+      .hero-proof { right: 0; bottom: 3px; width: 195px; padding: 14px 15px; }
+      .program-grid, .price-grid { grid-template-columns: 1fr; }
+      .program-card, .program-card img { min-height: 350px; }
+      .price-card.featured { transform: none; }
+      .price-card--consult { grid-template-columns: 1fr; }
+      .price-card--consult .button { width: 100%; }
+      .plan-benefits { grid-template-columns: 1fr; }
+      .stage-tabs { grid-template-columns: 1fr; }
+      .stage-tab { text-align: left; }
+      .online-list { grid-template-columns: 1fr; }
+      .online-media, .online-media img { min-height: 310px; }
+      .footer-inner { display: block; }
+      .footer-brand { margin-bottom: 16px; }
+      .whatsapp-float { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+      .whatsapp-float img { width: 28px; height: 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div id="shape-1760082654974" class="shape-1760082654974" style="background-color: #3b82f6; border-radius: 8px">undefined</div>
-    <div id="shape-1760082656139" class="shape-1760082656139" style="background-color: #10b981; border-radius: 50%">undefined</div>
-    <hr id="divider-1760082658014" class="divider-1760082658014" style="background-color: #e2e8f0; height: 2px" />
-    <div id="icon-1760082659509" class="icon-1760082659509" style="font-size: 48px; display: flex; align-items: center; justify-content: center; color: #f59e0b">undefined</div>
-    <div id="spacer-1760082660628" class="spacer-1760082660628" style="background-color: transparent; border: 2px dashed #d1d5db; border-radius: 4px">&nbsp;</div>
-    <div id="card-1760082683612" class="card-1760082683612" style="background-color: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border: 1px solid #e2e8f0">Este es el contenido de la tarjeta. Puedes agregar información importante aquí.</div>
-    <div id="alert-1760082687952" class="alert-1760082687952" style="background-color: #dbeafe; color: #1e40af; border-radius: 8px; padding: 16px; border: 1px solid #3b82f6; font-size: 14px">Este es un mensaje de alerta importante.</div>
-    <div id="progress-1760082690916" class="progress-1760082690916" style="background-color: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden">undefined</div>
-    <div id="container-1760082692731" class="container-1760082692731" style="background-color: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px">undefined</div>
-    <h1 id="text-1760082703789" class="text-1760082703789" style="font-size: 48px; font-weight: 700; color: #1a202c; text-align: center; line-height: 1.2">Nombre Completo</h1>
-    <p id="text-1760082704935" class="text-1760082704935" style="font-size: 22px; font-weight: 500; color: #4a5568; text-align: left; line-height: 1.7">Puesto | Perú</p>
-    <img id="image-1760082706017" src="https://picsum.photos/400/300" alt="Imagen de ejemplo" class="image-1760082706017" style="object-fit: cover; border-radius: 8px" />
-    <button id="button-1760140894985" class="button-1760140894985" style="background-color: #0077b5; color: #ffffff; border: none; border-radius: 12px; padding: 12px 20px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3); transition: all 0.2s ease">LinkedIn</button>
-    <button id="button-1760140914156" class="button-1760140914156" style="background-color: #1877f2; color: #ffffff; border: none; border-radius: 12px; padding: 12px 20px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3); transition: all 0.2s ease">Facebook</button>
-    <img id="image-1760141452326" src="https://picsum.photos/400/300" alt="Imagen de ejemplo" class="image-1760141452326" style="object-fit: cover; border-radius: 10000px" />
+  <header class="nav">
+    <div class="shell nav-inner">
+      <a href="#inicio" aria-label="Taygetos inicio"><img class="brand" src="assets/taygetos-logo.png" alt="Taygetos" /></a>
+      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
+        <a href="#programas">Programas</a>
+        <a href="#metodo">Método</a>
+        <a href="#planes">Planes</a>
+        <a href="#online">Online</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-controls="navLinks" aria-expanded="false">Menú</button>
+      <a class="nav-cta" href="https://wa.me/51973589352?text=Hola%20Taygetos%2C%20quiero%20conocer%20los%20planes" target="_blank" rel="noreferrer">Reserva tu clase</a>
     </div>
-    
-    <!-- JavaScript -->
-    <script src="./scripts/app.js"></script>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <div class="hero-eyebrow-row">
+            <div class="eyebrow">Arequipa · entrenamiento funcional</div>
+            <div class="hero-status">Cupos abiertos</div>
+          </div>
+          <h1>Entrena el movimiento. <span class="accent">Vive la diferencia.</span></h1>
+          <p class="lede">Fuerza, coordinación y confianza para moverte mejor en cada etapa de tu vida. Entrena con propósito, acompañado por coaches que entienden tu proceso.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#planes">Ver planes <span>↗</span></a>
+            <a class="button button-secondary" href="#programas">Conoce Taygetos</a>
+          </div>
+          <div class="hero-programs" aria-label="Programas por etapa">
+            <a class="hero-program" href="#programas"><small>01 / 12—17</small><strong>Adolescentes</strong></a>
+            <a class="hero-program" href="#programas"><small>02 / 18+</small><strong>Adultos</strong></a>
+          </div>
+        </div>
+        <div class="hero-media" aria-label="Entrenamiento funcional en Taygetos">
+          <div class="hero-frame hero-frame-main"><img src="assets/hero-training.png" alt="Adulto entrenando con kettlebell en un gimnasio funcional" /></div>
+          <div class="hero-frame hero-frame-secondary"><img src="assets/teens.png" alt="Adolescentes entrenando en Taygetos" /></div>
+          <div class="hero-badge">Desde<strong>Arequipa</strong></div>
+          <div class="hero-proof"><small>Entrenamiento integral</small><strong>Fuerza, coordinación y confianza.</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Servicios Taygetos">
+      <div class="ticker-track">
+        <div class="ticker-group"><span>Fuerza</span><span>Coordinación</span><span>Resistencia</span><span>Confianza</span><span>Online</span></div>
+        <div class="ticker-group" aria-hidden="true"><span>Fuerza</span><span>Coordinación</span><span>Resistencia</span><span>Confianza</span><span>Online</span></div>
+      </div>
+    </div>
+
+    <section class="section intro">
+      <div class="shell intro-grid">
+        <div class="intro-copy reveal">
+          <div class="eyebrow">Entrenar cambia más que tu físico</div>
+          <h2>Tu mejor versión se <span class="accent">entrena.</span></h2>
+          <p>En Taygetos trabajamos agilidad, coordinación, fuerza, resistencia, atención y socialización. Cada sesión tiene un propósito: que te muevas mejor y te sientas más capaz.</p>
+        </div>
+        <div class="metrics reveal" aria-label="Datos destacados">
+          <div class="metric"><strong>2</strong><span>programas por etapa</span></div>
+          <div class="metric"><strong>1:1</strong><span>acompañamiento real</span></div>
+          <div class="metric"><strong>100%</strong><span>entrenamiento funcional</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method" id="metodo">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><div class="eyebrow">Así se siente entrenar aquí</div><h2>Más que una rutina. <span class="accent">Un proceso.</span></h2></div>
+          <div>Diseñamos sesiones que se adaptan a tu etapa, tu ritmo y los objetivos que quieres alcanzar.</div>
+        </div>
+        <div class="method-grid">
+          <article class="method-card reveal"><span class="method-number">01 / EVALUACIÓN</span><h3>Entendemos tu punto de partida.</h3><p>Observamos cómo te mueves y qué necesitas para construir una base sólida.</p></article>
+          <article class="method-card reveal"><span class="method-number">02 / PROGRESIÓN</span><h3>Subes de nivel con intención.</h3><p>Trabajamos fuerza, agilidad y resistencia con retos claros y progresivos.</p></article>
+          <article class="method-card reveal"><span class="method-number">03 / COMUNIDAD</span><h3>Avanzas acompañado.</h3><p>Coaches y compañeros que hacen que volver a entrenar sea parte de tu semana.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programs" id="programas">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div class="eyebrow">Encuentra tu ritmo</div>
+          <h2>Un programa para <span class="accent">cada etapa.</span></h2>
+          <p class="lede">Sesiones dinámicas, progresivas y pensadas para que avances con seguridad.</p>
+        </div>
+        <div class="program-grid">
+          <article class="program-card reveal">
+            <img src="assets/teens.png" alt="Adolescentes realizando entrenamiento funcional" loading="lazy" />
+            <div class="program-content"><span class="program-tag">12 — 17 años</span><h3>Adolescentes</h3><p>Movimiento, energía y hábitos que acompañan su crecimiento.</p></div>
+          </article>
+          <article class="program-card reveal">
+            <img src="assets/adults.png" alt="Adulto realizando sentadilla con peso" loading="lazy" />
+            <div class="program-content"><span class="program-tag">18+ años</span><h3>Adultos</h3><p>Fuerza y condición para rendir mejor en tu vida diaria.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing" id="planes">
+      <div class="shell">
+        <div class="pricing-header section-heading reveal">
+          <div><div class="eyebrow">Encuentra tu plan</div><h2>Una etapa, un ritmo, <span class="accent">tu plan.</span></h2></div>
+          <p class="pricing-header-copy">Elige para quién es el entrenamiento y la frecuencia que mejor encaja en su semana.</p>
+        </div>
+        <div class="plan-builder reveal">
+          <aside class="stage-panel" aria-label="Programa por edad">
+            <span class="filter-label">1 · Elige el programa</span>
+            <div class="stage-tabs" role="tablist" aria-label="Etapa del entrenamiento">
+              <button class="stage-tab" type="button" data-program="adolescentes" role="tab" aria-selected="false"><strong>Adolescentes</strong><span>12 — 17 años</span></button>
+              <button class="stage-tab active" type="button" data-program="adultos" role="tab" aria-selected="true"><strong>Adultos</strong><span>18+ años</span></button>
+            </div>
+          </aside>
+          <div class="plan-main">
+            <div class="plan-topline">
+              <div class="plan-context" id="planContext" aria-live="polite"></div>
+              <div class="frequency-wrap">
+                <span class="filter-label">2 · Elige la frecuencia</span>
+                <div class="frequency-tabs" role="group" aria-label="Frecuencia del plan">
+                  <button class="active" type="button" data-frequency="diario" aria-pressed="true">Diario</button>
+                  <button type="button" data-frequency="interdiario" aria-pressed="false">Interdiario</button>
+                </div>
+              </div>
+            </div>
+            <div class="price-grid" id="priceGrid" aria-live="polite"></div>
+            <div class="plan-benefits" id="planBenefits"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section online" id="online">
+      <div class="shell online-grid">
+        <div class="online-media reveal"><img src="assets/online.png" alt="Mujer realizando entrenamiento online desde casa" loading="lazy" /></div>
+        <div class="online-copy reveal">
+          <div class="eyebrow">Entrena donde estés</div>
+          <h2>Los límites no deben estar en tu <span class="accent">mente.</span></h2>
+          <p class="lede">Clases en vivo por Zoom, una clase presencial a la semana y el seguimiento de un head coach profesional.</p>
+          <div class="online-list">
+            <div><b>01</b><span>Turno mañana<br><strong>5:00 am — 6:00 am</strong></span></div>
+            <div><b>02</b><span>4 clases online<br><strong>+ 1 presencial semanal</strong></span></div>
+            <div><b>03</b><span>Rutinas guiadas<br><strong>según tu progreso</strong></span></div>
+            <div><b>04</b><span>Comunidad Taygetos<br><strong>entrena acompañado</strong></span></div>
+          </div>
+          <a class="button button-primary" href="https://wa.me/51973589352?text=Hola%20Taygetos%2C%20quiero%20informaci%C3%B3n%20del%20entrenamiento%20online" target="_blank" rel="noreferrer">Consultar horarios ↗</a>
+          <p class="online-note">Escríbenos para confirmar horarios, cupos y disponibilidad del programa online.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div class="shell contact-box reveal">
+        <h2>Empieza con una clase. <span class="accent">Sigue por ti.</span></h2>
+        <a class="button button-primary" href="https://wa.me/51973589352?text=Hola%20Taygetos%2C%20quiero%20reservar%20una%20clase%20de%20prueba" target="_blank" rel="noreferrer">Escríbenos por WhatsApp ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <img class="footer-brand" src="assets/taygetos-logo.png" alt="Taygetos" />
+      <div>Urb. Las Orquídeas K17 · ASVEA Cercado, Arequipa</div>
+      <div>WhatsApp 973 589 352 · <span id="year"></span> Taygetos</div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/51973589352?text=Hola%20Taygetos%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20planes" target="_blank" rel="noreferrer" aria-label="Escribir a Taygetos por WhatsApp">
+    <img src="https://cdn.simpleicons.org/whatsapp/FFFFFF" alt="" aria-hidden="true" />
+  </a>
+
+  <script>
+    const plans = {
+      adolescentes: {
+        label: 'Adolescentes', age: '12 — 17 años',
+        description: 'Un programa para desarrollar agilidad, coordinación, fuerza, resistencia, atención y socialización.',
+        benefits: ['Progresión según nivel', 'Fuerza y resistencia funcional', 'Entorno guiado y motivador'],
+        frequencies: {
+          diario: null,
+          interdiario: [
+            { name: 'Mensual', price: 'S/ 240', note: 'Precio normal S/ 250.' },
+            { name: 'Bimestral', price: 'S/ 450', note: 'Precio normal S/ 500.', featured: true },
+            { name: 'Trimestral', price: 'S/ 650', note: 'Precio normal S/ 750.' }
+          ]
+        }
+      },
+      adultos: {
+        label: 'Adultos', age: '18+ años',
+        description: 'Entrenamiento funcional para mejorar salud, fuerza, resistencia y composición corporal.',
+        benefits: ['Sesiones guiadas por coach', 'Progresión y técnica', 'Trabajo integral de fuerza y resistencia'],
+        frequencies: {
+          diario: [
+            { name: 'Mensual', price: 'S/ 270', note: 'Acceso al programa diario.' },
+            { name: 'Bimestral', price: 'S/ 500', note: 'Continuidad durante 2 meses.', featured: true },
+            { name: 'Trimestral', price: 'S/ 720', note: 'Mayor constancia y ahorro.' }
+          ],
+          interdiario: [
+            { name: 'Mensual', price: 'S/ 240', note: 'Entrenamiento en días intercalados.' },
+            { name: 'Bimestral', price: 'S/ 450', note: 'Continuidad durante 2 meses.', featured: true },
+            { name: 'Trimestral', price: 'S/ 650', note: 'Mayor constancia y ahorro.' }
+          ]
+        }
+      }
+    };
+    let selectedProgram = 'adultos';
+    let selectedFrequency = 'diario';
+    const grid = document.querySelector('#priceGrid');
+    const planContext = document.querySelector('#planContext');
+    const planBenefits = document.querySelector('#planBenefits');
+    function renderPlans() {
+      const program = plans[selectedProgram];
+      const items = program.frequencies[selectedFrequency];
+      planContext.innerHTML = `<small>${program.age}</small><h3>${program.label} · ${selectedFrequency === 'diario' ? 'Plan diario' : 'Plan interdiario'}</h3><p>${program.description}</p>`;
+      planBenefits.innerHTML = program.benefits.map(benefit => `<div class="plan-benefit">${benefit}</div>`).join('');
+      if (!items) {
+        grid.innerHTML = `<article class="price-card price-card--consult"><div><h3>Consulta cupos y tarifa</h3><div class="price-note">Esta combinación no tiene una tarifa publicada en el material recibido. Te confirmamos horarios, disponibilidad y precio por WhatsApp.</div></div><a class="button button-primary" href="https://wa.me/51973589352?text=${encodeURIComponent(`Hola Taygetos, quiero información del programa ${program.label}, frecuencia ${selectedFrequency}`)}" target="_blank" rel="noreferrer">Consultar ahora ↗</a></article>`;
+      } else {
+        grid.innerHTML = items.map(item => `
+        <article class="price-card ${item.featured ? 'featured' : ''}">
+          ${item.featured ? '<span class="ribbon">Más elegido</span>' : ''}
+          <h3>${item.name}</h3>
+          <div class="price">${item.price}</div>
+          <div class="price-note">${item.note}</div>
+          <a class="button ${item.featured ? 'button-primary' : 'button-secondary'}" href="https://wa.me/51973589352?text=${encodeURIComponent(`Hola Taygetos, me interesa el plan ${item.name} para ${program.label}, frecuencia ${selectedFrequency}`)}" target="_blank" rel="noreferrer">Elegir plan ↗</a>
+        </article>`).join('');
+      }
+      grid.classList.remove('is-switching');
+      void grid.offsetWidth;
+      grid.classList.add('is-switching');
+    }
+    document.querySelectorAll('[data-program]').forEach(button => button.addEventListener('click', () => {
+      selectedProgram = button.dataset.program;
+      document.querySelectorAll('[data-program]').forEach(item => { item.classList.remove('active'); item.setAttribute('aria-selected', 'false'); });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+      renderPlans();
+    }));
+    document.querySelectorAll('[data-frequency]').forEach(button => button.addEventListener('click', () => {
+      selectedFrequency = button.dataset.frequency;
+      document.querySelectorAll('[data-frequency]').forEach(item => { item.classList.remove('active'); item.setAttribute('aria-pressed', 'false'); });
+      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
+      renderPlans();
+    }));
+    renderPlans();
+    const menuToggle = document.querySelector('#menuToggle');
+    const navLinks = document.querySelector('#navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+    document.querySelector('#year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
